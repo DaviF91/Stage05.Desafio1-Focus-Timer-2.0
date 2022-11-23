@@ -108,6 +108,6 @@ button:hover{
   
 }
 
-.sound button .on {
+.sounds .on {
   background-color: var(--bg-sound-secondary-color);
 }
