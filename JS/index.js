@@ -10,12 +10,39 @@ const buttonCoffee = document.querySelector('.coffee')
 const buttonFireplace = document.querySelector('.fireplace')
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
+let minutes
+let time = 5
 
-let minutes = 5
+function countdown(){
+  setTimeout(function(){
+    let seconds = Number(secondsDisplay.textContent)
+    let minutes = Number(minutesDisplay.textContent)
+
+    secondsDisplay.textContent = String(seconds - 1).padStart(2,'0')
+
+    if(minutes <= 0){
+      buttonPause.classList.add('hide')
+      buttonPlay.classList.remove('hide')
+      return
+    }
+
+    if(seconds <= 0){
+      seconds = 2
+      
+      minutesDisplay.textContent = String(minutes - 1).padStart(2,'0')
+
+    }
+    secondsDisplay.textContent = String(seconds - 1).padStart(2,'0')
+
+    countdown()
+  }, 1000)
+}
 
 buttonPlay.addEventListener('click', function () {
   buttonPause.classList.remove('hide')
   buttonPlay.classList.add('hide')
+
+  countdown()
 })
 
 buttonPause.addEventListener('click', function () {
@@ -29,13 +56,13 @@ buttonStop.addEventListener('click', function () {
 })
 
 buttonAdd.addEventListener('click', function () {
-let soma = Number(minutesDisplay.textContent) + minutes
-minutesDisplay.textContent = soma
+  let soma = Number(minutesDisplay.textContent) + time
+  minutesDisplay.textContent = String(soma).padStart(2,'0')
 })
 
 buttonSubtract.addEventListener('click',function(){
-  let subtract = Number(minutesDisplay.textContent) - minutes
-  minutesDisplay.textContent = subtract
+  let subtract = Number(minutesDisplay.textContent) - time
+  minutesDisplay.textContent = String(subtract).padStart(2,'0')
 })
 
 buttonForest.addEventListener('click', function () {
