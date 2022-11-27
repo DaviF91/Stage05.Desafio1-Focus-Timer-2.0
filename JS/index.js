@@ -13,26 +13,47 @@ const secondsDisplay = document.querySelector('.seconds')
 let minutes
 let time = 5
 
+function resetControls() {
+  buttonPause.classList.add('hide')
+  buttonPlay.classList.remove('hide')
+}
+
+// Função para adicionar +5min no timer
+function addTimer(){
+  let soma = Number(minutesDisplay.textContent) + time
+  minutesDisplay.textContent = String(soma).padStart(2,'0')
+}
+// Função para subtrair -5min no timer
+function subtractTimer(){
+  let subtract = Number(minutesDisplay.textContent) - time
+  minutesDisplay.textContent = String(subtract).padStart(2,'0')
+}
+
+function updateDisplay(minutes, seconds){
+  minutesDisplay.textContent = String(minutes).padStart(2,'0')
+  secondsDisplay.textContent = String(seconds).padStart(2,'0')
+}
+
 function countdown(){
   setTimeout(function(){
     let seconds = Number(secondsDisplay.textContent)
     let minutes = Number(minutesDisplay.textContent)
 
-    secondsDisplay.textContent = String(seconds - 1).padStart(2,'0')
+    
+    updateDisplay(minutes, 0)
 
     if(minutes <= 0){
-      buttonPause.classList.add('hide')
-      buttonPlay.classList.remove('hide')
+      resetControls()
       return
     }
 
     if(seconds <= 0){
       seconds = 2
-      
-      minutesDisplay.textContent = String(minutes - 1).padStart(2,'0')
 
+      --minutes
     }
-    secondsDisplay.textContent = String(seconds - 1).padStart(2,'0')
+    
+    updateDisplay(minutes, String(seconds) - 1)
 
     countdown()
   }, 1000)
@@ -46,23 +67,19 @@ buttonPlay.addEventListener('click', function () {
 })
 
 buttonPause.addEventListener('click', function () {
-  buttonPause.classList.add('hide')
-  buttonPlay.classList.remove('hide')
+  resetControls()
 })
 
 buttonStop.addEventListener('click', function () {
-  buttonPause.classList.add('hide')
-  buttonPlay.classList.remove('hide')
+  resetControls()
 })
 
 buttonAdd.addEventListener('click', function () {
-  let soma = Number(minutesDisplay.textContent) + time
-  minutesDisplay.textContent = String(soma).padStart(2,'0')
+  addTimer()
 })
 
 buttonSubtract.addEventListener('click',function(){
-  let subtract = Number(minutesDisplay.textContent) - time
-  minutesDisplay.textContent = String(subtract).padStart(2,'0')
+  subtractTimer()
 })
 
 buttonForest.addEventListener('click', function () {
