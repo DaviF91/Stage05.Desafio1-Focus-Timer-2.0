@@ -10,8 +10,10 @@ const buttonCoffee = document.querySelector('.coffee')
 const buttonFireplace = document.querySelector('.fireplace')
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
-let minutes
+
+let minutes = Number(minutesDisplay.textContent)
 let time = 5
+let timerTimeOut
 
 function resetControls() {
   buttonPause.classList.add('hide')
@@ -34,8 +36,13 @@ function updateDisplay(minutes, seconds){
   secondsDisplay.textContent = String(seconds).padStart(2,'0')
 }
 
+function resetTimer(){
+  updateDisplay(minutes, 0)
+  clearTimeout(timerTimeOut)
+}
+
 function countdown(){
-  setTimeout(function(){
+  timerTimeOut = setTimeout(function(){
     let seconds = Number(secondsDisplay.textContent)
     let minutes = Number(minutesDisplay.textContent)
 
@@ -48,7 +55,7 @@ function countdown(){
     }
 
     if(seconds <= 0){
-      seconds = 2
+      seconds = 5
 
       --minutes
     }
@@ -68,10 +75,12 @@ buttonPlay.addEventListener('click', function () {
 
 buttonPause.addEventListener('click', function () {
   resetControls()
+  clearTimeout(timerTimeOut)
 })
 
 buttonStop.addEventListener('click', function () {
   resetControls()
+  resetTimer()
 })
 
 buttonAdd.addEventListener('click', function () {
