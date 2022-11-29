@@ -15,9 +15,8 @@ const buttonFireplace = document.querySelector('.fireplace')
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 
-let minutes = Number(minutesDisplay.textContent)
-let time = 5
-let timerTimeOut
+
+
 
 const controls = Controls({
   buttonPlay,
@@ -27,10 +26,8 @@ const controls = Controls({
 const timer = Timer(
   {minutesDisplay,
   secondsDisplay,
-  timerTimeOut,
-  time,
-  resetControls: controls.reset}
-  )
+  resetControls: controls.reset
+})
 
 buttonPlay.addEventListener('click', function () {
   controls.play()
@@ -39,7 +36,7 @@ buttonPlay.addEventListener('click', function () {
 
 buttonPause.addEventListener('click', function () {
   controls.reset()
-  clearTimeout(timerTimeOut)
+  timer.hold()
 })
 
 buttonStop.addEventListener('click', function () {
