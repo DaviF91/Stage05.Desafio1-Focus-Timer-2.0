@@ -13,7 +13,6 @@ import {
   minutesDisplay,
   secondsDisplay
 } from './elements.js'
-
 import Sounds from './sounds.js'
 
 const sound = Sounds()
@@ -66,6 +65,7 @@ buttonForest.addEventListener('click', function () {
   sound.soundRain.pause()
   sound.soundCoffee.pause()
   sound.soundFireplace.pause()
+  sound.loop()
 })
 
 buttonRain.addEventListener('click', function () {

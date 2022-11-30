@@ -8,8 +8,12 @@ export default function(){
   const soundCoffee = new Audio("./sounds/Cafeteria.wav")
   const soundFireplace = new Audio("./sounds/Lareira.wav")
 
-  soundForest.loop
   
+  soundForest.loop = true
+  soundRain.loop = true
+  soundCoffee.loop = true
+  soundFireplace.loop = true
+
   function pressButton(){
     buttonPressAudio.play()
   }
@@ -25,6 +29,6 @@ export default function(){
     soundForest,
     soundRain,
     soundCoffee,
-    soundFireplace
+    soundFireplace,
   }
 }
